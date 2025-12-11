@@ -81,12 +81,11 @@ body {
 
 /* Header with logo */
 .slide-header {
-  display: flex;
-  flex-direction: column;      /* stack logo/text and pill vertically */
-  align-items: center;         /* center horizontally */
-  justify-content: flex-start; 
-  gap: 0.12in;
-  margin-bottom: 0.3in;
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* left / center / right */
+  align-items: center;
+  column-gap: 0.3in;
+  margin-bottom: 0.25in;
 }
 
 
@@ -96,7 +95,7 @@ body {
   gap: 0.18in;
 }
 
-.brand-logo {
+.brand-left .brand-logo {
   height: 0.6in;
   width: auto;
   display: block;
@@ -124,7 +123,8 @@ body {
 }
 
 .slide-pill {
-  font-size: 9pt;
+  justify-self: center;
+  font-size: 12pt;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   padding: 0.12in 0.28in;
@@ -189,7 +189,15 @@ body {
   color: #0a64c8;
   font-weight: 700;
 }
-
+.header-title {
+  justify-self: end;
+  font-size: 10pt;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #041c32;
+  text-align: right;
+}
 .content p:first-child::before {
   content: "";
 }
@@ -275,15 +283,21 @@ body {
   <div class="left-bar"></div>
   <div class="slide-inner">
     <header class="slide-header">
-      <div class="brand">
-        <img src="Sonablate.png" alt="Sonablate HIFU" class="brand-logo"/>
-        <div class="brand-text">
-          <span class="brand-name">Sonablate HIFU</span>
-          <span class="brand-subtitle">Patient Perspective</span>
-        </div>
-      </div>
-      <div class="slide-pill">Clinical Story</div>
-    </header>
+  <!-- Left: logo -->
+  <div class="brand-left">
+    <img src="Sonablate.png" alt="Sonablate HIFU" class="brand-logo" />
+  </div>
+
+  <!-- Center: pill -->
+  <div class="slide-pill">Clinical Story</div>
+  <!-- ^ change this text per slide: “Diagnosis”, “Treatment Choice”, etc. -->
+
+  <!-- Right: title text -->
+  <div class="header-title">
+    SONABLATE HIFU PATIENT PERSPECTIVE
+  </div>
+</header>
+
 
     <div class="slide-body">
       <div class="title-row">
