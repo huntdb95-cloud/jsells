@@ -82,11 +82,13 @@ body {
 /* Header with logo */
 .slide-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.35in;
-  margin-bottom: 0.25in;
+  flex-direction: column;      /* stack logo/text and pill vertically */
+  align-items: center;         /* center horizontally */
+  justify-content: flex-start; 
+  gap: 0.12in;
+  margin-bottom: 0.3in;
 }
+
 
 .brand {
   display: inline-flex;
