@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Sonablate Presentation (Medical-Tech) — Print Slides</title>
+<style>
+@page {
+  size: 8.5in 11in; /* US Letter portrait */
+  margin: 0.5in;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, #0fd8c8 0, #0fd8c8 5%, transparent 40%),
+    radial-gradient(circle at bottom right, #0a64c8 0, #0a64c8 8%, #041c32 55%, #020811 90%);
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  color: #0b1b2d;
+}
+
+/* Slide frame */
+.slide {
+  position: relative;
+  width: 8.5in;
+  height: 11in;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #ffffff 0%, #f7fbff 50%, #f2f7fb 100%);
+  margin: 0.4in auto;
+  page-break-after: always;
+  border-radius: 22px;
+  box-shadow:
+    0 22px 40px rgba(3, 29, 53, 0.21),
+    0 0 0 1px rgba(5, 45, 85, 0.06);
+  overflow: hidden;
+}
+
+/* Main layout */
+.slide-inner {
+  position: absolute;
+  inset: 0;
+  padding: 0.7in 0.75in 0.55in 1.15in;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Left accent bar with tech feel */
+.left-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.55in;
+  background: linear-gradient(180deg, #0fd8c8 0%, #00b1ff 45%, #0051a8 100%);
+}
+
+.left-bar::before,
+.left-bar::after {
+  content: "";
+  position: absolute;
+  right: -0.15in;
+  width: 0.42in;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+}
+
+.left-bar::before {
+  top: 0.9in;
+  height: 1.4in;
+}
+
+.left-bar::after {
+  bottom: 1.1in;
+  height: 1in;
+}
+
+/* Header with logo */
+.slide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35in;
+  margin-bottom: 0.35in;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.18in;
+}
+
+.brand-logo {
+  height: 0.55in;
+  width: auto;
+  display: block;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.02in;
+}
+
+.brand-name {
+  font-size: 11pt;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #041c32;
+}
+
+.brand-subtitle {
+  font-size: 9pt;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #5d6b80;
+}
+
+.slide-pill {
+  font-size: 9pt;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.12in 0.28in;
+  border-radius: 999px;
+  border: 1px solid rgba(6, 71, 131, 0.18);
+  color: #064783;
+  background: radial-gradient(circle at top left, rgba(15, 216, 200, 0.17), transparent 55%);
+}
+
+/* Title + accent */
+.title {
+  font-size: 26pt;
+  font-weight: 700;
+  color: #041c32;
+  margin: 0 0 0.06in 0;
+}
+
+.title-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.2in;
+}
+
+.title-tag {
+  font-size: 9pt;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #5a6d88;
+}
+
+.underline {
+  position: relative;
+  height: 0.09in;
+  margin: 0.1in 0 0.28in 0;
+  border-radius: 999px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #0fd8c8 0%, #00b1ff 45%, #0a64c8 75%, #041c32 100%);
+}
+
+.underline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.25), transparent 60%);
+}
+
+/* Content area */
+.content {
+  font-size: 13pt;
+  line-height: 1.5;
+  color: #182535;
+}
+
+.content p {
+  margin: 0 0 0.08in 0;
+}
+
+/* Make numbered lines read like bullet points visually */
+.content p::before {
+  content: "• ";
+  color: #0a64c8;
+  font-weight: 700;
+}
+
+.content p:first-child::before {
+  content: "";
+}
+
+/* Emphasis lines */
+.content p.emph {
+  color: #00a9b5;
+  font-weight: 700;
+}
+
+.content p.emph::before {
+  content: "◆ ";
+  color: #00b1ff;
+}
+
+/* Diagnostics list slide – keep clean bullets for all lines */
+.slide.diagnostics .content p::before {
+  content: "• ";
+}
+
+/* Footer with page number & progress dots */
+.footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.25in;
+  font-size: 9pt;
+  color: #5d6b80;
+  border-top: 1px solid rgba(11, 27, 45, 0.06);
+}
+
+.footer-left {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.footer-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15in;
+}
+
+.footer-page {
+  font-weight: 600;
+  color: #041c32;
+}
+
+.footer-dots {
+  display: inline-flex;
+  gap: 0.06in;
+}
+
+.footer-dot {
+  width: 0.08in;
+  height: 0.08in;
+  border-radius: 999px;
+  background: rgba(6, 71, 131, 0.18);
+}
+
+.footer-dot.active {
+  width: 0.16in;
+  background: linear-gradient(90deg, #0fd8c8, #00b1ff);
+}
+
+/* Print tweaks */
+@media print {
+  body {
+    background: #ffffff;
+  }
+  .slide {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Slide 1 -->
+<section class="slide">
+  <div class="left-bar"></div>
+  <div class="slide-inner">
+    <header class="slide-header">
+      <div class="brand">
+        <img src="Sonablate.png" alt="Sonablate HIFU" class="brand-logo"/>
+        <div class="brand-text">
+          <span class="brand-name">Sonablate HIFU</span>
+          <span class="brand-subtitle">Patient Perspective</span>
+        </div>
+      </div>
+      <div class="slide-pill">Clinical Story</div>
+    </header>
+
+    <div class="slide-body">
+      <div class="title-row">
+        <h1 class="title">Jack Sells</h1>
+      </div>
+      <div class="underline"></div>
+      <div class="content">
+        <p>Founder – Sales Search America</p>
+        <p>1) Not a normal patient – medical sales recruiter for 34 years I had access to people that would tell me the truth – the good, the bad, and the ugly</p>
+        <p>2) Intuitive Surgical – 2000 &amp; 2001 was one of their 1st recruiters The Da Vinci robot is the gold standard for prostate cancer surgery</p>
+        <p>3) Philips DMS – 2008 to present exclusive recruiter Uro-Nav is the gold standard for prostate cancer fusion biopsy</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Sonablate HIFU</div>
+      <div class="footer-right">
+        <span class="footer-page">1 / 11</span>
+        <span class="footer-dots">
+          <span class="footer-dot active"></span>
+          <span class="footer-dot"></span>
+          <span class="footer-dot"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 2 -->
+<section class="slide">
+  <div class="left-bar"></div>
+  <div class="slide-inner">
+    <header class="slide-header">
+      <div class="brand">
+        <img src="Sonablate.png" alt="Sonablate HIFU" class="brand-logo"/>
+        <div class="brand-text">
+          <span class="brand-name">Sonablate HIFU</span>
+          <span class="brand-subtitle">Patient Perspective</span>
+        </div>
+      </div>
+      <div class="slide-pill">Diagnosis</div>
+    </header>
+
+    <div class="slide-body">
+      <div class="title-row">
+        <h1 class="title">2022 – Diagnosed with bilateral prostate cancer</h1>
+      </div>
+      <div class="underline"></div>
+      <div class="content">
+        <p>1) Gleason Score: 3+4=7 Treatable Cancer</p>
+        <p>2) Gleason Score: 3+3=6 Watchful Wait Cancer</p>
+        <p class="emph">Dr. Jeff Mullins REMEMBER THIS NAME (Johns Hopkins Trained) immediately recommended surgery with the de Vinci robot – the gold standard of care</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Sonablate HIFU</div>
+      <div class="footer-right">
+        <span class="footer-page">2 / 11</span>
+        <span class="footer-dots">
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+          <span class="footer-dot"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 3 -->
+<section class="slide">
+  <div class="left-bar"></div>
+  <div class="slide-inner">
+    <header class="slide-header">
+      <div class="brand">
+        <img src="Sonablate.png" alt="Sonablate HIFU" class="brand-logo"/>
+        <div class="brand-text">
+          <span class="brand-name">Sonablate HIFU</span>
+          <span class="brand-subtitle">Patient Perspective</span>
+        </div>
+      </div>
+      <div class="slide-pill">Clinical Access</div>
+    </header>
+
+    <div class="slide-body">
+      <div class="title-row">
+        <h1 class="title">AGAIN I am NOT A NORMAL PATIENT</h1>
+      </div>
+      <div class="underline"></div>
+      <div class="content">
+        <p>Because of my business</p>
+        <p>1) Access to every prostate cancer technology in the market</p>
+        <p>2) Access to their internal clinical data</p>
+        <p>3) access to their key opinion leaders (AKA, KOL’s)</p>
+        <p>4) access to their sales leadership and sales reps because they know better than anyone what produces the best outcomes</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Sonablate HIFU</div>
+      <div class="footer-right">
+        <span class="footer-page">3 / 11</span>
+        <span class="footer-dots">
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 4 -->
+<section class="slide">
+  <div class="left-bar"></div>
+  <div class="slide-inner">
+    <header class="slide-header">
+      <div class="brand">
+        <img src="Sonablate.png" alt="Sonablate HIFU" class="brand-logo"/>
+        <div class="brand-text">
+          <span class="brand-name">Sonablate HIFU</span>
+          <span class="brand-subtitle">Patient Perspective</span>
+        </div>
+      </div>
+      <div class="slide-pill">Prior Experience</div>
+    </header>
+
+    <div class="slide-body">
+      <div class="title-row">
+        <h1 class="title">2011 – Bypass surgery the de Vinci Robot (Emory, Atlanta, GA.)</h1>
+      </div>
+      <div class="underline"></div>
+      <div class="content">
+        <p>QUESTION: how many people do you know that had bypass surgery and 3 day later went back to work full time?</p>
+        <p>1) Thursday met the surgeon for 1st time</p>
+        <p>2) Friday surgery</p>
+        <p>3) Saturday transferred to normal patient room</p>
+        <p>4) Sunday would have been released if I lived in Atlanta</p>
+        <p>5) Monday released, drove home, went to the office – back to work</p>
+        <p>BUT WHEN IT CAME TO MY PROSTATE I CHOOSE SONABLATE HIFU</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Sonablate HIFU</div>
+      <div class="footer-right">
+        <span class="footer-page">4 / 11</span>
+        <span class="footer-dots">
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 5 -->
+<section class="slide">
+  <div class="left-bar"></div>
+  <div class="slide-inner">
+    <header class="slide-header">
+      <div class="brand">
+        <img src="Sonablate.png" alt="Sonablate HIFU" class="brand-logo"/>
+        <div class="brand-text">
+          <span class="brand-name">Sonablate HIFU</span>
+          <span class="brand-subtitle">Patient Perspective</span>
+        </div>
+      </div>
+      <div class="slide-pill">Treatment Choice</div>
+    </header>
+
+    <div class="slide-body">
+      <div class="title-row">
+        <h1 class="title">WHY SONABLATE HIFU</h1>
+      </div>
+      <div class="underline"></div>
+      <div class="content">
+        <p>• I wanted to live –</p>
+        <p>Sonablate had the best clinical data for cancer reoccurrence.</p>
+        <p>• I wanted both my treatable cancer and watchful wait cancer eradicated</p>
+        <p>• I wanted the least negative side effects as possible</p>
+        <p>• If it did not work, it would not prevent me from any additional therapy</p>
+        <p class="emph">First line of defense</p>
+        <p>• Noninvasive – lowest recovery time</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Sonablate HIFU</div>
+      <div class="footer-right">
+        <span class="footer-page">5 / 11</span>
+        <span class="footer-dots">
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 6 -->
+<section class="slide">
+  <div class="left-bar"></div>
+  <div class="slide-inner">
+    <header class="slide-header">
+      <div class="brand">
+        <img src="Sonablate.png" alt="Sonablate HIFU" class="brand-logo"/>
+        <div class="brand-text">
+          <span class="brand-name">Sonablate HIFU</span>
+          <span class="brand-subtitle">Patient Perspective</span>
+        </div>
+      </div>
+      <div class="slide-pill">Comparative View</div>
+    </header>
+
+    <div class="slide-body">
+      <div class="title-row">
+        <h1 class="title">Sonablate HIFU versus:</h1>
+      </div>
+      <div class="underline"></div>
+      <div class="content">
+        <p> </p>
+        <p>1) Intuitive Surgical – 17% vs. 20%</p>
+        <p>2) radiation – some other cancer</p>
+        <p>3) Focal One – HIFU not the same + REDO</p>
+        <p>4) Profound Medical – impotent</p>
+        <p>5) Cryoablation – impotent</p>
+        <p class="emph">Sonablate HIFU was best in class as it relates to cancer reoccurrence, sexual dysfunction, incontinence, recovery time, and Cost (to me and hospital)</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Sonablate HIFU</div>
+      <div class="footer-right">
+        <span class="footer-page">6 / 11</span>
+        <span class="footer-dots">
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 7 -->
+<section class="slide">
+  <div class="left-bar"></div>
+  <div class="slide-inner">
+    <header class="slide-header">
+      <div class="brand">
+        <img src="Sonablate.png" alt="Sonablate HIFU" class="brand-logo"/>
+        <div class="brand-text">
+          <span class="brand-name">Sonablate HIFU</span>
+          <span class="brand-subtitle">Patient Perspective</span>
+        </div>
+      </div>
+      <div class="slide-pill">Procedure Experience</div>
+    </header>
+
+    <div class="slide-body">
+      <div class="title-row">
+        <h1 class="title">Sonablate Proceedure</h1>
+      </div>
+      <div class="underline"></div>
+      <div class="content">
+        <p>1) Friday - went home same day</p>
+        <p>2) Saturday - Went to lunch at the beach</p>
+        <p>3) Sunday flew home</p>
+        <p>4) Monday – went back to work</p>
+        <p>5) Next Friday – played golf and lifted weights</p>
+        <p class="emph">ZERO PAIN</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Sonablate HIFU</div>
+      <div class="footer-right">
+        <span class="footer-page">7 / 11</span>
+        <span class="footer-dots">
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 8 -->
+<section class="slide diagnostics">
+  <div class="left-bar"></div>
+  <div class="slide-inner">
+    <header class="slide-header">
+      <div class="brand">
+        <img src="Sonablate.png" alt="Sonablate HIFU" class="brand-logo"/>
+        <div class="brand-text">
+          <span class="brand-name">Sonablate HIFU</span>
+          <span class="brand-subtitle">Patient Perspective</span>
+        </div>
+      </div>
+      <div class="slide-pill">Diagnostics</div>
+    </header>
+
+    <div class="slide-body">
+      <div class="title-row">
+        <h1 class="title">Diagnostics</h1>
+      </div>
+      <div class="underline"></div>
+      <div class="content">
+        <p>1) PSA below 1.0</p>
+        <p>2) MRI 100% clear</p>
+        <p>3) No cancer</p>
+        <p>4) No sexual dsyfuction</p>
+        <p>5) No incontinence</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Sonablate HIFU</div>
+      <div class="footer-right">
+        <span class="footer-page">8 / 11</span>
+        <span class="footer-dots">
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 9 -->
+<section class="slide">
+  <div class="left-bar"></div>
+  <div class="slide-inner">
+    <header class="slide-header">
+      <div class="brand">
+        <img src="Sonablate.png" alt="Sonablate HIFU" class="brand-logo"/>
+        <div class="brand-text">
+          <span class="brand-name">Sonablate HIFU</span>
+          <span class="brand-subtitle">Patient Perspective</span>
+        </div>
+      </div>
+      <div class="slide-pill">Adoption</div>
+    </header>
+
+    <div class="slide-body">
+      <div class="title-row">
+        <h1 class="title">JEFF MULLINS Remamber the name?</h1>
+      </div>
+      <div class="underline"></div>
+      <div class="content">
+        <p>• The surgeon who wanted to use the de Vinci on me</p>
+        <p>LOST me as a patient because he was not trained on SONABLATE HIFU</p>
+        <p>• He is now trained SONABLATE HIFU and doing 8-10 cases per month producing great results!</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Sonablate HIFU</div>
+      <div class="footer-right">
+        <span class="footer-page">9 / 11</span>
+        <span class="footer-dots">
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 10 -->
+<section class="slide">
+  <div class="left-bar"></div>
+  <div class="slide-inner">
+    <header class="slide-header">
+      <div class="brand">
+        <img src="Sonablate.png" alt="Sonablate HIFU" class="brand-logo"/>
+        <div class="brand-text">
+          <span class="brand-name">Sonablate HIFU</span>
+          <span class="brand-subtitle">Patient Perspective</span>
+        </div>
+      </div>
+      <div class="slide-pill">Standard of Care</div>
+    </header>
+
+    <div class="slide-body">
+      <div class="title-row">
+        <h1 class="title">My Question as a patient: WHY is it not the standard of care?</h1>
+      </div>
+      <div class="underline"></div>
+      <div class="content">
+        <p>1) WHY is it not the 1st line of defense</p>
+        <p>2) Watchful Wait Cancer WHY does every man not have the option for it to be removed. WHY is that not being looked at as preventive care?</p>
+        <p class="emph">3) Contains the overall cost of healthcare for the entire eco system IT LOWERS OVERALL COsT</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Sonablate HIFU</div>
+      <div class="footer-right">
+        <span class="footer-page">10 / 11</span>
+        <span class="footer-dots">
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 11 -->
+<section class="slide">
+  <div class="left-bar"></div>
+  <div class="slide-inner">
+    <header class="slide-header">
+      <div class="brand">
+        <img src="Sonablate.png" alt="Sonablate HIFU" class="brand-logo"/>
+        <div class="brand-text">
+          <span class="brand-name">Sonablate HIFU</span>
+          <span class="brand-subtitle">Patient Perspective</span>
+        </div>
+      </div>
+      <div class="slide-pill">Call to Action</div>
+    </header>
+
+    <div class="slide-body">
+      <div class="title-row">
+        <h1 class="title">MY CHALLENGE</h1>
+      </div>
+      <div class="underline"></div>
+      <div class="content">
+        <p>1) Let’s change the way prostate cancer is treated FOREVER</p>
+        <p>2) Let’s eranicate prostate cancer FORVER</p>
+        <p>3) Let’s eliminate prostate cancer morbidity FOREVER</p>
+        <p>4) As a patient I know SONABLATE HIFU is THE WAY</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Sonablate HIFU</div>
+      <div class="footer-right">
+        <span class="footer-page">11 / 11</span>
+        <span class="footer-dots">
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+          <span class="footer-dot active"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
